@@ -1,18 +1,90 @@
 #!/usr/bin/env node
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-console */
 
+/**
+ * Module dependencies.
+ */
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+const debug = require('debug')('sca-capstone:server');
 const http = require('http');
+const app = require('./app');
 
-const config = require('./config')[process.env.NODE_ENV || 'development'];
+/**
+ * Normalize a port into a number, string, or false.
+ */
 
-const log = config.log();
-const app = require('./app')(config);
+function normalizePort(val) {
+  const myPort = parseInt(val, 10);
+
+  if (isNaN(myPort)) {
+    // named pipe
+    return val;
+  }
+
+  if (myPort >= 0) {
+    // myPort number
+    return myPort;
+  }
+
+  return false;
+}
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
 
 const server = http.createServer(app);
 
-server.listen(process.env.PORT || 3000);
+/**
+ * Event listener for HTTP server "error" event.
+ */
 
-server.on('listening', () => {
-  log.info(
-    `Hi there! I'm listening on port ${server.address().port} in ${app.get('env')} mode.`,
-  );
-});
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? `pipe   ${addr}` : `port   ${addr.port}`;
+  debug(`Listening on   ${bind}`);
+}
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
