@@ -12,6 +12,14 @@ async function createUser(request, response) {
   }
 }
 
+function protectedRoute(request, response) {
+  response.status(200).json({
+    status: "Success",
+    message: 'Route is protected'
+  });
+}
+
 module.exports = {
-    createUser
+    createUser,
+    protectedRoute,
 }

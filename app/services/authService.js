@@ -23,10 +23,20 @@ async function registerUser(userData) {
     confirmPassword: passwordHash
   })
 
-  const {firstName, lastName, email, password, createdAt, updatedAt} = newUser;
-  const data = {firstName, lastName, email, password, createdAt, updatedAt}
+  const {id, firstName, lastName, email, createdAt, updatedAt, deletedAt} = newUser;
+  const data = {id, firstName, lastName, email, createdAt, updatedAt, deletedAt};
 
   return data
+}
+
+async function login(userData) {
+  const existingUser = await User.findOne({ where: { email: userData.email } });
+
+  if (!existingUser) {
+    throw new BadUserRequestError("User credentials does not exist in our database")
+  }
+
+  
 }
 
 module.exports = {
