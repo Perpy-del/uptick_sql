@@ -27,8 +27,10 @@ module.exports = sequelize.define('User',
       allowNull: false,
     },
     confirmPassword: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      type: DataTypes.VIRTUAL,
+      get: () => {
+        return this.password
+      }
     },
     createdAt: {
       allowNull: false,

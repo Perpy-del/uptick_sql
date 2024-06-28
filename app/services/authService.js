@@ -5,8 +5,6 @@ const hash = require('../utilities/hash');
 async function registerUser(userData) {
   const existingUser = await User.findOne({where: { email: userData.email}});
 
-  console.log(existingUser);
-
   if (existingUser) {
     throw new BadUserRequestError("User already exists. Please log in")
   }
@@ -16,7 +14,6 @@ async function registerUser(userData) {
   }
 
   const passwordHash = await hash.hashPassword(userData.password);
-  console.log(passwordHash);
 
   const newUser = await User.create({
     firstName: userData.firstName,
@@ -26,8 +23,8 @@ async function registerUser(userData) {
     confirmPassword: passwordHash
   })
 
-  const {firstName, lastName, email, password} = newUser;
-  const data = {firstName: firstName, lastName: lastName, email: email, password: password}
+  const {firstName, lastName, email, password, createdAt, updatedAt} = newUser;
+  const data = {firstName, lastName, email, password, createdAt, updatedAt}
 
   return data
 }
