@@ -5,8 +5,14 @@ const hash = require('../utilities/hash');
 async function registerUser(userData) {
   const existingUser = await User.findOne({where: { email: userData.email}});
 
+  console.log(existingUser);
+
   if (existingUser) {
     throw new BadUserRequestError("User already exists. Please log in")
+  }
+
+  if (userData.password !== userData.confirmPassword) {
+    throw new BadUserRequestError("Password and Confirm Password do not match")
   }
 
   const passwordHash = await hash.hashPassword(userData.password);
@@ -16,10 +22,14 @@ async function registerUser(userData) {
     firstName: userData.firstName,
     lastName: userData.lastName,
     email: userData.email,
-    password: passwordHash
+    password: passwordHash,
+    confirmPassword: passwordHash
   })
 
-  return newUser
+  const {firstName, lastName, email, password} = newUser;
+  const data = {firstName: firstName, lastName: lastName, email: email, password: password}
+
+  return data
 }
 
 module.exports = {

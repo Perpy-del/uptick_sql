@@ -1,5 +1,5 @@
 'use strict';
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
 
 module.exports = sequelize.define('User', 
@@ -7,35 +7,39 @@ module.exports = sequelize.define('User',
     id: {
       primaryKey: true,
       allowNull: false,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
     },
     firstName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     lastName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    confirmPassword: {
       type: Sequelize.STRING,
       allowNull: false,
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     deletedAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
     }
   },
   {
