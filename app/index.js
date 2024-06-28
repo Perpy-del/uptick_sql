@@ -4,9 +4,7 @@ const logger = require('morgan');
 const rotatingFileStream = require('../config/logger');
 // const connectToDb = require('../config/database');
 require('dotenv').config();
-
-// // connectToDb().then(res => console.log(res.options));
-// connectToDb();
+const authRouter = require('./http/routes/authRouter')
 
 const app = express();
 
@@ -15,6 +13,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // TODO: Use cors
+
+// Define routers
+app.use(authRouter)
 
 app.get('/api', (req, res) => res.send('Welcome to UptickSQL!!! 😎'));
 

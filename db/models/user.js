@@ -1,20 +1,14 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Sequelize } = require('sequelize');
 const sequelize = require('../../config/database');
-const { Sequelize } = require('.');
 
 module.exports = sequelize.define('User', 
   {
     id: {
-      allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
-    },
-    userType: {
-      type: Sequelize.ENUM["0", "1", "2"],
+      allowNull: false,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4
     },
     firstName: {
       type: Sequelize.STRING,
