@@ -2,10 +2,11 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const rotatingFileStream = require('../config/logger');
-// const connectToDb = require('../config/database');
+const cors = require('cors');
 require('dotenv').config();
 const authRouter = require('./http/routes/authRouter')
 const blogRouter = require('./http/routes/blogRouter');
+
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(logger('combined', { stream: rotatingFileStream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// TODO: Use cors
+app.use(cors());
 
 // Define routers
 app.use(authRouter)
