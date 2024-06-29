@@ -3,9 +3,11 @@ const Joi = require('joi');
 function createBlogValidator(request, response, next) {
   const schema = Joi.object({
     title: Joi.string().trim().required(),
-    slug: Joi.string().trim().required(),
     author: Joi.string().trim().required(),
     body: Joi.string().trim().required(),
+    category: Joi.string().trim().optional().allow(''),
+    is_featured: Joi.boolean().optional().allow(''),
+    thumbnail: Joi.string().trim().optional().allow('')
   });
 
   const { error } = schema.validate(request.body, { abortEarly: false });
