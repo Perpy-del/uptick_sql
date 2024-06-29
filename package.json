@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A simple CRUD application using SQL",
   "scripts": {
-    "start:dev": "nodemon server && set NODE_ENV=development",
-    "start:test": "nodemon server && set NODE_ENV=test",
-    "start:prod": "nodemon server && set NODE_ENV=production"
+    "start:dev": "set NODE_ENV=development && nodemon server",
+    "start:test": "set NODE_ENV=test && nodemon server",
+    "start:prod": "set NODE_ENV=production && nodemon server"
   },
   "keywords": [],
   "author": "Perpetual",
