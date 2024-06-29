@@ -49,6 +49,8 @@ function authenticateUser(request, response, next) {
         }
       })
     }
+
+    next();
 }
 
 

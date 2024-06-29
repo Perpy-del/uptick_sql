@@ -14,7 +14,7 @@ module.exports = {
     password: process.env.STAGING_DB_PASSWORD,
     database: process.env.STAGING_DB_DATABASE,
     host: process.env.STAGING_DB_HOST,
-    port: process.env.DEV_DB_PORT,
+    port: process.env.STAGING_DB_PORT,
     dialect: process.env.STAGING_DB_DIALECT,
   },
   production: {
@@ -22,7 +22,7 @@ module.exports = {
     password: process.env.PROD_DB_PASSWORD,
     database: process.env.PROD_DB_DATABASE,
     host: process.env.PROD_DB_HOST,
-    port: process.env.DEV_DB_PORT,
+    port: process.env.PROD_DB_PORT,
     dialect: process.env.PROD_DB_DIALECT,
   },
 };

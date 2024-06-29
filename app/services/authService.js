@@ -1,6 +1,7 @@
 const User = require('../../db/models/user');
 const BadUserRequestError = require('../errors/BadUserRequestError');
 const hash = require('../utilities/hash');
+const middleware = require('../http/middlewares/authMiddleware');
 
 async function registerUser(userData) {
   const existingUser = await User.findOne({where: { email: userData.email}});
@@ -36,9 +37,32 @@ async function login(userData) {
     throw new BadUserRequestError("User credentials does not exist in our database")
   }
 
-  
+  const passwordCorrect = await hash.comparePassword(userData.password, existingUser.password)
+
+  if (!passwordCorrect) {
+    throw new BadUserRequestError("User credentials does not exist in our database")
+  }
+
+  const payload = {email: existingUser.email, id: existingUser.id}
+
+  const { token, tokenExpiryTime } = middleware.generateToken(payload)
+
+  const data = {
+    id: existingUser.id,
+    email: existingUser.email,
+    firstName: existingUser.firstName,
+    lastName: existingUser.lastName,
+    createdAt: existingUser.createdAt,
+    updatedAt: existingUser.updatedAt,
+    deletedAt: existingUser.deletedAt,
+    token: token,
+    tokenExpiresAt: tokenExpiryTime
+  }
+
+  return data;
 }
 
 module.exports = {
-    registerUser
+    registerUser,
+    login
 }
