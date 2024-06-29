@@ -4,6 +4,10 @@ const hash = require('../utilities/hash');
 const middleware = require('../http/middlewares/authMiddleware');
 
 async function registerUser(userData) {
+  const { v4: uuidv4 } = require('uuid');
+  const newID = uuidv4();
+  console.log("NEW ID: ", newID);
+
   const existingUser = await User.findOne({where: { email: userData.email}});
 
   if (existingUser) {
