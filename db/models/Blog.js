@@ -29,6 +29,7 @@ const Blog = sequelize.define(
     },
     is_featured: {
       type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
     category: {
       type: Sequelize.STRING,
@@ -49,6 +50,7 @@ const Blog = sequelize.define(
     },
   },
   {
+    timestamps: true,
     paranoid: true, // to not completely delete data
     freezeTableName: true,
     modelName: 'Blog',

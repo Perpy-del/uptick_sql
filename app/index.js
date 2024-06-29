@@ -5,6 +5,7 @@ const rotatingFileStream = require('../config/logger');
 // const connectToDb = require('../config/database');
 require('dotenv').config();
 const authRouter = require('./http/routes/authRouter')
+const blogRouter = require('./http/routes/blogRouter');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 // Define routers
 app.use(authRouter)
+app.use(blogRouter);
 
 app.get('/api', (req, res) => res.send('Welcome to UptickSQL!!! 😎'));
 

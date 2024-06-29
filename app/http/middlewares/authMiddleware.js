@@ -34,7 +34,7 @@ function authenticateUser(request, response, next) {
         })
     }
 
-    const token = authorizationHeader.split(' ')[token]
+    const token = authorizationHeader.split(' ')[1]
 
     try {
       jwt.verify(token, process.env.DEV_APP_SECRET)

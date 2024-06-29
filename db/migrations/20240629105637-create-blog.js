@@ -26,7 +26,8 @@ module.exports = {
         allowNull: false,
       },
       is_featured: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       category: {
         type: Sequelize.STRING
