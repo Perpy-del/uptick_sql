@@ -34,8 +34,40 @@ async function createPost(data) {
   return newPost;
 }
 
+// Update A Blog Post
+async function updatePost(data, id) {
+  const existingPost = await Blog.findByPk(id);
+
+  await Blog.update(
+    {
+      title: data.title,
+      slug: data.title ? sluggify(data.title) : existingPost.slug,
+      author: data.author,
+      body: data.body,
+      category: data.category ?? 'Uncategorized',
+      thumbnail: data.thumbnail,
+      is_featured: data.is_featured,
+    },
+    { where: { id: id } }
+  );
+
+  const updatedPost = await Blog.findByPk(id);
+
+  return updatedPost;
+}
+
+// Delete A Blog Post 
+async function deletePost(id) {
+    const postToBeDeleted = await Blog.findByPk(id);
+
+    const deleted = await Blog.destroy({where: {id: id}});
+    return {deleted, postToBeDeleted};
+}
+
 module.exports = {
   getPosts,
   getPost,
-  createPost
+  createPost,
+  updatePost,
+  deletePost
 };
