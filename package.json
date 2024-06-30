@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "A simple CRUD application using SQL",
   "scripts": {
-    "start": "nodemon server",
-    "start:dev": "set NODE_ENV=development && nodemon server.js",
+    "start": "node server",
+    "start:dev": "nodemon server.js",
     "start:test": "set NODE_ENV=test && nodemon server",
     "start:prod": "set NODE_ENV=production && nodemon server.js"
   },
