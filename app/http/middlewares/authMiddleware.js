@@ -4,7 +4,7 @@ const { addSeconds, getTime, formatISO } = require('date-fns');
 function generateToken(data) {
   const tokenExpiryTime = addSeconds(
     new Date(),
-    process.env.DEV_JWT_EXPIRY_TIME
+    process.env.PROD_JWT_EXPIRY_TIME
   );
 
   const payload = {
@@ -13,8 +13,9 @@ function generateToken(data) {
     id: data.id,
   };
 
-  const token = jwt.sign(payload, process.env.DEV_APP_SECRET, {
-    issuer: process.env.DEV_JWT_ISSUER,
+  const token = jwt.sign(payload, process.env.PROD_APP_SECRET, {
+    // issuer: process.env.DEV_JWT_ISSUER,
+    issuer: process.env.PROD_JWT_ISSUER,
   });
 
   return { token, tokenExpiryTime };
@@ -37,7 +38,7 @@ function authenticateUser(request, response, next) {
     const token = authorizationHeader.split(' ')[1]
 
     try {
-      jwt.verify(token, process.env.DEV_APP_SECRET)
+      jwt.verify(token, process.env.PROD_APP_SECRET)
     } catch (error) {
       return response.status(401).json({
         data: {
