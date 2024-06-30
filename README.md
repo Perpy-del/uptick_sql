@@ -2,7 +2,7 @@
 
 A simple application using NodeJS built on ExpressJS and PostgreSQL with Sequelize ORM. 
 
-This repository contains the source code for the MyQuizPal application. Follow the instructions below to set up the codebase on your local machine.
+This repository contains the source code for the uptick_sql application. Follow the instructions below to set up the codebase on your local machine.
 
 ### Here is the [API Documentation](https://documenter.getpostman.com/view/26756602/2sA3duGZ88)
 
@@ -46,21 +46,21 @@ Before setting up the codebase, make sure you have the following prerequisites i
    ```
 2. Change into the project directory:
 
-```bash
-   cd uptick_sql
-```
+    ```bash
+    cd uptick_sql
+    ```
 
 3. Install the required dependencies:
 
-```bash
-   npm install
-```
+    ```bash
+    npm install
+    ```
 
 4. Run the application
 
-```bash
-   npm run start
-```
+    ```bash
+    npm run start
+    ```
 
 ## Configuration
 
@@ -144,11 +144,11 @@ uptick_sql/
 
 **[Back to Table of Contents](https://github.com/Perpy-del/uptick_sql?tab=readme-ov-file#table-of-contents)**
 
-To start the MyQuizPal application on your local environment, run the following command:
+To start the uptick_sql application on your local environment, run the following command:
 
 npm run start:dev
 
-Visit `http://localhost:PORT` in your web browser to access the application.
+Visit `http://localhost:PORT/api` in your web browser to access the application.
 
 **Base URL**
 Main URL
