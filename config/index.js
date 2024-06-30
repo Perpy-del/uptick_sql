@@ -7,7 +7,7 @@ module.exports = {
     database: process.env.DEV_DB_DATABASE,
     host: process.env.DEV_DB_HOST,
     port: process.env.DEV_DB_PORT,
-    dialect: process.env.DEV_DB_DIALECT,
+    dialect: "postgres",
   },
   test: {
     username: process.env.STAGING_DB_USERNAME,
@@ -15,7 +15,7 @@ module.exports = {
     database: process.env.STAGING_DB_DATABASE,
     host: process.env.STAGING_DB_HOST,
     port: process.env.STAGING_DB_PORT,
-    dialect: process.env.STAGING_DB_DIALECT,
+    dialect: process.env.STAGING_DB_DIALECT || "postgres",
   },
   production: {
     username: process.env.PROD_DB_USERNAME,
@@ -23,6 +23,6 @@ module.exports = {
     database: process.env.PROD_DB_DATABASE,
     host: process.env.PROD_DB_HOST,
     port: process.env.PROD_DB_PORT,
-    dialect: process.env.PROD_DB_DIALECT,
+    dialect: "postgres",
   },
 };
